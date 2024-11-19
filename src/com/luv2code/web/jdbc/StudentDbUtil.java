@@ -221,5 +221,45 @@ public void deleteStudnet(String id) throws SQLException {
 		close(myConn, myStmt, null);
 	}
 }
-	
+
+public boolean findStudent(String email, String password) throws SQLException {
+    Connection myConn = null;
+    PreparedStatement myStmt = null;
+    ResultSet myRs = null;
+
+    try {
+        
+        myConn = dataSource.getConnection();
+
+        
+        String sql = "SELECT CONCAT(first_name, last_name) AS full_name FROM web_student_tracker.student "+"WHERE email =?";
+        
+        // Prepare statement
+        myStmt = myConn.prepareStatement(sql);
+
+        // Set parameter
+        myStmt.setString(1, email);
+
+        // Execute query
+        myRs = myStmt.executeQuery();
+
+        // Process result
+        if (myRs.next()) {
+            String passString=myRs.getString("full_name");
+            if(passString.equals(password)) {
+            	return true;
+            }
+           
+        }
+        
+    } finally {
+        // Close resources
+        close(myConn, myStmt, myRs);
+    }
+
+  return false;
 }
+}
+///MaryPublic
+//mary@luv2code.com
+

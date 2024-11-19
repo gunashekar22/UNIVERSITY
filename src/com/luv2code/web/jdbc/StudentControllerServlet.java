@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import com.mysql.cj.jdbc.CallableStatementWrapper;
+
 @WebServlet("/StudentControllerServlet")
 public class StudentControllerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -65,6 +67,13 @@ public class StudentControllerServlet extends HttpServlet {
 				deleteStudnet(request,response);
 				break;
 			}
+			case "LOGIN":{
+				if(verifyLogin(request,response)) {
+					listStudents(request, response);
+				}
+	
+				break;
+			} 
 	
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + theCommand);
@@ -77,11 +86,36 @@ public class StudentControllerServlet extends HttpServlet {
     }
 
    
-    private void deleteStudnet(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+    private boolean verifyLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		
+		String email=request.getParameter("email");
+		String password=request.getParameter("password");
+		boolean isFind=false;
+		try {
+			isFind=studentDbUtil.findStudent(email,password);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		if(!isFind) {
+			
+			response.sendRedirect(request.getContextPath());
+			
+		}
+		return isFind;
+		
+	}
+
+
+	private void deleteStudnet(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	String id=request.getParameter("studentId");
 		studentDbUtil.deleteStudnet(id);
+		listStudents(request, response);
 //		response.sendRedirect(request.getContentPath());
-		response.sendRedirect(request.getContextPath());
+//		response.sendRedirect(request.getContextPath());
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
+//        dispatcher.forward(request, response);
 		
 	}
 
@@ -100,8 +134,10 @@ public class StudentControllerServlet extends HttpServlet {
     		
     		studentDbUtil.updateStudent(theStudent);
     		
-    		
-    		response.sendRedirect(request.getContextPath());
+    		listStudents(request, response);
+//    		response.sendRedirect(request.getContextPath());
+//    		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
+//            dispatcher.forward(request, response);
     		
     	}
 
@@ -134,9 +170,11 @@ public class StudentControllerServlet extends HttpServlet {
 		Student theStudent = new Student(firstName, lastName, email);
 		
 		studentDbUtil.addStudent(theStudent);
-		
+		listStudents(request, response);
 //		
-		response.sendRedirect(request.getContextPath());
+//		response.sendRedirect(request.getContextPath());
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
+//        dispatcher.forward(request, response);
 	}
 	
 
