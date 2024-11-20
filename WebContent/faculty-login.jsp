@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Student Login</title>
+<title>Faculty Login</title>
 <link type="text/css" rel="stylesheet" href="css/login-page.css">
 </head>
 <body>
  <div class="login-container">
-        <h2>Student Login</h2>
+        <h2>Faculty Login</h2>
         
         <form action="StudentControllerServlet" method="GET">
         <input type="hidden" name="command" value="LOGIN" />
@@ -24,7 +24,7 @@
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
-        <a href="faculty-login.jsp">Faculty Login</a>
+        <a href="login-page.jsp">Student Login</a>
     </div>
     
     

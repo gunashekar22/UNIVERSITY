@@ -38,6 +38,10 @@
 						<td><label>Email:</label></td>
 						<td><input type="text" name="email" /></td>
 					</tr>
+					<tr>
+						<td><label>Phone Num:</label></td>
+						<td><input type="text" name="pn" /></td>
+					</tr>
 					
 					<tr>
 						<td><label></label></td>

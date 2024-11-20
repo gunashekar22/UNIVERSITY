@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import com.mysql.cj.jdbc.CallableStatementWrapper;
+//import com.mysql.cj.jdbc.CallableStatementWrapper;
 
 @WebServlet("/StudentControllerServlet")
 public class StudentControllerServlet extends HttpServlet {
@@ -69,7 +69,8 @@ public class StudentControllerServlet extends HttpServlet {
 			}
 			case "LOGIN":{
 				if(verifyLogin(request,response)) {
-					listStudents(request, response);
+//					listStudents(request, response);
+					displayStudent(request,response);
 				}
 	
 				break;
@@ -86,7 +87,29 @@ public class StudentControllerServlet extends HttpServlet {
     }
 
    
-    private boolean verifyLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    private void displayStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//    	request.setAttribute("name", "guna");
+    	String emailString=request.getParameter("email");
+//		request.setAttribute("name",request.getParameter("email"));
+		Student theStudent=studentDbUtil.getStudentByEmail(emailString);
+		request.setAttribute("THE_STUDENT", theStudent);
+//		request.setAttribute("", response);
+		
+//		String theStudentId = request.getParameter("studentId");
+//		
+//		Student theStudent = studentDbUtil.getStudent(theStudentId);
+//
+//		request.setAttribute("THE_STUDENT", theStudent);
+    	
+		
+    	
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("/Student-detail.jsp");
+    	dispatcher.forward(request, response);
+	
+	}
+//saahas@gmail.com   saahasundabatla
+
+	private boolean verifyLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
@@ -139,6 +162,7 @@ public class StudentControllerServlet extends HttpServlet {
 //    		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
 //            dispatcher.forward(request, response);
     		
+    		
     	}
 
 
@@ -149,8 +173,7 @@ public class StudentControllerServlet extends HttpServlet {
     		String theStudentId = request.getParameter("studentId");
     		
     		Student theStudent = studentDbUtil.getStudent(theStudentId);
-    		
-    	
+
     		request.setAttribute("THE_STUDENT", theStudent);
     		
     		RequestDispatcher dispatcher = 
@@ -164,7 +187,8 @@ public class StudentControllerServlet extends HttpServlet {
 		// read student info from form data
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		String email = request.getParameter("email");		
+		String email = request.getParameter("email");	
+		String phoneNumber = request.getParameter("pn");
 		
 		// create a new student object
 		Student theStudent = new Student(firstName, lastName, email);
