@@ -11,7 +11,7 @@
  <div class="login-container">
         <h2>Faculty Login</h2>
         
-        <form action="StudentControllerServlet" method="GET">
+        <form action="FacultyControllerServlet" method="GET">
         <input type="hidden" name="command" value="LOGIN" />
             
             <div class="form-group">

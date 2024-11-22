@@ -12,6 +12,7 @@
 	<h3>Student FirstName:<span>${THE_STUDENT.first_name}</span></h3>
 	<h3>Student LastName:<span>${THE_STUDENT.last_name}</span></h3>
 	<h3>Email:<span class="email">:${THE_STUDENT.email}</span></h3>
+	<h3>Student PhoneNumber:<span>${THE_STUDENT.phoneNumber}</span></h3>
 </div>
 </body>
 </html>

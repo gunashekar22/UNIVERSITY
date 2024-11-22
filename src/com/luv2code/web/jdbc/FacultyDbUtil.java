@@ -13,11 +13,11 @@ import javax.sql.DataSource;
 
 import com.mysql.cj.protocol.a.MysqlBinaryValueDecoder;
 
-public class StudentDbUtil {
+public class FacultyDbUtil {
 
 	private DataSource dataSource;
 
-	public StudentDbUtil(DataSource theDataSource) {
+	public FacultyDbUtil(DataSource theDataSource) {
 		dataSource = theDataSource;
 	}
 	
@@ -226,7 +226,7 @@ public void deleteStudnet(String id) throws SQLException {
 	}
 }
 
-public boolean findStudent(String email, String password) throws SQLException {
+public boolean findFaculty(String email, String password) throws SQLException {
     Connection myConn = null;
     PreparedStatement myStmt = null;
     ResultSet myRs = null;
@@ -236,7 +236,7 @@ public boolean findStudent(String email, String password) throws SQLException {
         myConn = dataSource.getConnection();
 
         
-        String sql = "SELECT CONCAT(first_name, last_name) AS full_name FROM web_student_tracker.student "+"WHERE email =?";
+        String sql = "SELECT CONCAT(first_name, last_name) AS full_name FROM web_student_tracker.faculty "+"WHERE email =?";
         
         // Prepare statement
         myStmt = myConn.prepareStatement(sql);

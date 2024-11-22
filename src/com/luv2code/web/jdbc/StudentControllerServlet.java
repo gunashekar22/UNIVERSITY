@@ -40,7 +40,9 @@ public class StudentControllerServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
+        
+  
+    	try {
         	String theCommand=request.getParameter("command");
         	if(theCommand==null) {
         		theCommand="LIST";
@@ -134,7 +136,8 @@ public class StudentControllerServlet extends HttpServlet {
 	private void deleteStudnet(HttpServletRequest request, HttpServletResponse response) throws Exception {
     	String id=request.getParameter("studentId");
 		studentDbUtil.deleteStudnet(id);
-		listStudents(request, response);
+		response.sendRedirect("/web-student-tracker/StudentControllerServlet");
+//		listStudents(request, response);
 //		response.sendRedirect(request.getContentPath());
 //		response.sendRedirect(request.getContextPath());
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
@@ -151,8 +154,9 @@ public class StudentControllerServlet extends HttpServlet {
     		String firstName = request.getParameter("firstName");
     		String lastName = request.getParameter("lastName");
     		String email = request.getParameter("email");
+    		String phoneNumber = request.getParameter("phoneNumber");
     		
-    		Student theStudent = new Student(id, firstName, lastName, email);
+    		Student theStudent = new Student(id, firstName, lastName, email,phoneNumber);
     		
     		
     		studentDbUtil.updateStudent(theStudent);
@@ -188,15 +192,15 @@ public class StudentControllerServlet extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String email = request.getParameter("email");	
-		String phoneNumber = request.getParameter("pn");
+		String phoneNumber = request.getParameter("phoneNumber");
 		
 		// create a new student object
-		Student theStudent = new Student(firstName, lastName, email);
+		Student theStudent = new Student(firstName, lastName, email,phoneNumber);
 		
 		studentDbUtil.addStudent(theStudent);
-		listStudents(request, response);
+//		listStudents(request, response);
 //		
-//		response.sendRedirect(request.getContextPath());
+		response.sendRedirect("/web-student-tracker/StudentControllerServlet");
 //		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
 //        dispatcher.forward(request, response);
 	}
@@ -206,7 +210,7 @@ public class StudentControllerServlet extends HttpServlet {
 	
 
 
-	private void listStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	void listStudents(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<Student> students = studentDbUtil.getStudents();
         
         

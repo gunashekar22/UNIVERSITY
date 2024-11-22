@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +10,7 @@
  <div class="login-container">
         <h2>Student Login</h2>
         
-        <form action="StudentControllerServlet" method="GET">
+        <form name="loginForm" action="StudentControllerServlet" method="GET" onsubmit="return validateForm()">
         <input type="hidden" name="command" value="LOGIN" />
             
             <div class="form-group">
@@ -26,8 +25,20 @@
         </form>
         <a href="faculty-login.jsp">Faculty Login</a>
     </div>
-    
-    
 
+    <!-- Prevent browser back button behavior -->
+    <script type="text/javascript">
+       
+        function validateForm() {
+            var email = document.forms["loginForm"]["email"].value;
+            var password = document.forms["loginForm"]["password"].value;
+
+            if (email == "" || password == "") {
+                alert("Both email and password are required.");
+                return false; 
+            }
+            return true; 
+        }
+    </script>
 </body>
 </html>

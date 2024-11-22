@@ -5,19 +5,28 @@ public class Student {
 	String first_name;
 	String last_name;
 	String email;
+	 String phoneNumber;
 	
-	public Student(String first_name, String last_name, String email) {
+	public Student(String first_name, String last_name, String email, String phoneNumber) {
 		super();
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
+		this.phoneNumber=phoneNumber;
 	}
-	public Student(int id, String first_name, String last_name, String email) {
+	public Student(int id, String first_name, String last_name, String email,String phoneNumber) {
 		super();
 		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
+		this.phoneNumber=phoneNumber;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	public int getId() {
 		return id;

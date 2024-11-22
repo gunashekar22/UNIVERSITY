@@ -29,6 +29,7 @@
 		<th>First Name </th>
 		<th>Last Name </th>
 		<th>Email</th>
+		<th>PhoneNumber</th>
 		<th>Action</th>
 	
 	</tr>
@@ -47,6 +48,7 @@
 		<td>${stud.first_name}</td>
 		<td>${stud.last_name}</td>
 		<td>${stud.email}</td>
+		<td>${stud.phoneNumber}</td>
 		<td><a href="${tempLink}">Update</a>
 				|
 			<a href="${delLink}",
