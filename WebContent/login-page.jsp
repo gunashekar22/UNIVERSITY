@@ -33,7 +33,7 @@
             var email = document.forms["loginForm"]["email"].value;
             var password = document.forms["loginForm"]["password"].value;
 
-            if (email == "" || password == "") {
+            if (email.trim() == "" || password.trim() == "") {
                 alert("Both email and password are required.");
                 return false; 
             }

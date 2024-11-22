@@ -16,7 +16,7 @@
             var phoneNumber = document.forms["studentForm"]["phoneNumber"].value;
 
             
-            if (firstName == "" || lastName == "" || email == "" || phoneNumber == "") {
+            if (firstName.trim() === '' || lastName.trim() === '' || email.trim() === '' || phoneNumber.trim() === '') {
                 alert("All fields must be filled out.");
                 return false;  // Prevent form submission
             }
@@ -34,9 +34,8 @@
     
     <div id="container">
         <h3>Add Student</h3>
-        
-        <!-- Add onsubmit to call the validateForm function onsubmit="return validateForm()" -->
-        <form name="studentForm" action="StudentControllerServlet" method="GET" >
+    
+        <form name="studentForm" action="StudentControllerServlet" method="GET" onsubmit="return validateForm()" >
         
             <input type="hidden" name="command" value="ADD" />
             

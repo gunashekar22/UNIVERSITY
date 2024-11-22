@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="text" id="password" name="password" required>
+                <input id="password" name="password" type="password" required oncopy="preventCopy(event)">
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
@@ -28,6 +28,14 @@
     </div>
     
     
+<script>
 
+function preventCopy(event){
+	event.preventDefault();
+} 
+
+
+</script>
 </body>
+
 </html>
